@@ -1,0 +1,53 @@
+/* JSON API Object */
+
+// NOTES
+
+/* 'permitAll' needs to always come first so other roles can make use of it
+* as they come afterward
+*/
+
+{
+    "Test": {
+        "VALUES": {
+            "id": {
+                "type": "PKEY",
+                "description":"ID for test"
+            },
+            "testdata": {
+                "type": "String",
+                "description":"Field to show testdata",
+                "mockData": "blahblahblah"
+            }
+        },
+        "URI": {
+            "test/show": {
+                "REQUEST": {
+                    "permitAll":["id"]
+                },
+                "RESPONSE": {
+                	"permitAll":["id"],
+                    "ROLE_ADMIN":["testdata"],
+                    "ROLE_USER":["testdata"]
+                }
+            },
+            "test/save": {
+                "REQUEST": {
+                    "permitAll":["testdata"]
+                },
+                "RESPONSE": {
+                    "permitAll":["id"]
+                },
+                "ERROR":["304_NOT_MODIFIED"]
+            },
+            "test/update": {
+                "REQUEST": {
+                    "permitAll":["id","testdata"]
+                },
+                "RESPONSE": {
+                    "permitAll":["id"]
+                },
+                "ERROR":["304_NOT_MODIFIED"]
+            }
+        }
+    }
+}
