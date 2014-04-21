@@ -8,7 +8,6 @@ import net.nosegrind.apitoolkit.Api
 import net.nosegrind.apitoolkit.ApiStatuses
 
 @Secured(['ROLE_USER'])
-@Transactional(readOnly = true)
 class TestController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -36,7 +35,7 @@ class TestController {
 	}
 	
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="GET",name='Test',description="Get test data")
+	@Api(method="GET",name='Test',description="Get test data",roles=['permitAll'])
     def show() {
 		//println("show called...")
 		respond Test.get(params.id)
