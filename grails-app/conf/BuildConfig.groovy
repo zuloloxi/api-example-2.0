@@ -77,7 +77,7 @@ grails.project.dependency.resolution = {
 	compile ":famfamfam:1.0"
 	compile ":jquery-ui:1.10.3"
 	compile ":mail:1.0"
-	compile ":api-toolkit:2.0.4"
+	compile ":api-toolkit:2.0.6"
 
 	// used for testing
 	test(":spock:0.7") {
