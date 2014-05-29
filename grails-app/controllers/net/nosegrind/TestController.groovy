@@ -49,26 +49,28 @@ class TestController {
     @Transactional
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
 	@Api(method="PUT",name='Test',description="Create test data",roles=['ROLE_ADMIN','ROLE_USER'])
-    def save(Test testInstance) {
-        if (testInstance == null) {
-            notFound()
-            return
-        }
-
-        if (testInstance.hasErrors()) {
-            respond testInstance.errors, view:'create'
-            return
-        }
-
-        testInstance.save flush:true
-
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'testInstance.label', default: 'Test'), testInstance.id])
-                redirect testInstance
-            }
-            '*' { respond testInstance, [status: CREATED] }
-        }
+    def save() {
+		Test testInstance = new Test()
+		testInstance.testdata = params.testdata
+		
+		if(apiToolkitService.isApiCall()){
+		        if (testInstance == null) {
+		            println("tes is null")
+					return
+		        }
+		
+		        if (testInstance.hasErrors()) {
+					println("test has errors")
+		            respond testInstance.errors, view:'create'
+					return
+		        }
+		        
+			if (testInstance.save(flush:true)) {
+				println(testInstance)
+				respond testInstance
+			}
+		}
+		return
     }
 
     def edit(Test testInstance) {
