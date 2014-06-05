@@ -15,7 +15,7 @@ environments {
 			url = "jdbc:mysql://127.0.0.1/testdb"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "root"
-			password = "Ch335eB0y"
+			password = "password"
 			properties {
 				maxActive = -1
 				maxIdle = 5
@@ -41,7 +41,7 @@ environments {
 			url = "jdbc:mysql://127.0.0.1/testuser"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "root"
-			password = "Ch335eB0y"
+			password = "password"
 			properties {
 				maxActive = -1
 				maxIdle = 5
@@ -66,7 +66,7 @@ environments {
 			url = "jdbc:mysql://127.0.0.1/testdb"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "root"
-			password = "Ch335eB0y"
+			password = "password"
 			properties {
 				maxActive = -1
 				maxIdle = 5
@@ -89,7 +89,7 @@ environments {
 			url = "jdbc:mysql://127.0.0.1/testuser"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 			username = "root"
-			password = "Ch335eB0y"
+			password = "password"
 			properties {
 				maxActive = -1
 				maxIdle = 5
