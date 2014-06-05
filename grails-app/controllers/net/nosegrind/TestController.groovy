@@ -21,7 +21,7 @@ class TestController {
     }
 
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="GET",name='Test',description="Get fred data",roles=['REOLE_ADMIN','ROLE_USER'])
+	@Api(method="GET",name='Test',description="Get fred data",roles=['ROLE_ADMIN','ROLE_USER'])
 	def fred() {
 		if(apiToolkitService.isApiCall()){
 			respond Test.get(params.id)
@@ -31,7 +31,7 @@ class TestController {
 
 	
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="GET",name='Test',description="Get test data",roles=['REOLE_ADMIN','ROLE_USER'])
+	@Api(method="GET",name='Test',description="Get test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def show() {
 		if(apiToolkitService.isApiCall()){
 			//println("show called...")
@@ -47,7 +47,7 @@ class TestController {
 
     @Transactional
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="PUT",name='Test',description="Save test data",roles=['REOLE_ADMIN','ROLE_USER'])
+	@Api(method="PUT",name='Test',description="Save test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def save() {
 		Test testInstance = new Test()
 		testInstance.testdata = params.testdata
@@ -78,7 +78,7 @@ class TestController {
 
     @Transactional
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="POST",name='Test',description="Update test data",roles=['REOLE_ADMIN','ROLE_USER'])
+	@Api(method="POST",name='Test',description="Update test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def update(Test testInstance) {
 		println("update called...")
 		if(apiToolkitService.isApiCall()){
