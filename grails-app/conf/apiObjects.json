@@ -7,7 +7,7 @@
 */
 
 {
-    "Test": {
+    "test": {
         "VALUES": {
             "id": {
                 "type": "PKEY",
@@ -21,6 +21,9 @@
         },
         "URI": {
             "test/show": {
+             	"METHOD":"GET",
+            	"DESCRIPTION":"Get test data",
+            	"ROLES":["ROLE_ADMIN","ROLE_USER"],
                 "REQUEST": {
                     "permitAll":["id"]
                 },

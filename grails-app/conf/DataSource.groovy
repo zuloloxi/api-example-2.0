@@ -14,21 +14,24 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testdb"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
 				maxActive = -1
 				maxIdle = 5
 				minIdle = 0
 				initialSize = 1
 				maxWait = 10000
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
-				numTestsPerEvictionRun=3
-				testOnBorrow=true
-				testWhileIdle=true
-				testOnReturn=false
-				validationQuery="SELECT 1"
+				validationQuery = "SELECT 1"
+				testOnBorrow = true
+				testOnReturn = true
+				testWhileIdle = true
+				timeBetweenEvictionRunsMillis = 1000 * 60 * 30
+				numTestsPerEvictionRun = 3
+				minEvictableIdleTimeMillis = 1000 * 60 * 30
+			  }
+			properties {
+
 			}
 		}
 		dataSource_user {
@@ -37,21 +40,21 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testuser"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
 				maxActive = -1
 				maxIdle = 5
 				minIdle = 0
 				initialSize = 1
 				maxWait = 10000
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
-				numTestsPerEvictionRun=3
-				testOnBorrow=true
-				testWhileIdle=true
-				testOnReturn=false
-				validationQuery="SELECT 1"
+				validationQuery = "SELECT 1"
+				testOnBorrow = true
+				testOnReturn = true
+				testWhileIdle = true
+				timeBetweenEvictionRunsMillis = 1000 * 60 * 30
+				numTestsPerEvictionRun = 3
+				minEvictableIdleTimeMillis = 1000 * 60 * 30
 			}
 		}
 	}
@@ -62,21 +65,21 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testdb"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
 				maxActive = -1
 				maxIdle = 5
 				minIdle = 0
 				initialSize = 1
 				maxWait = 10000
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
-				numTestsPerEvictionRun=3
-				testOnBorrow=true
-				testWhileIdle=true
-				testOnReturn=false
-				validationQuery="SELECT 1"
+				validationQuery = "SELECT 1"
+				testOnBorrow = true
+				testOnReturn = true
+				testWhileIdle = true
+				timeBetweenEvictionRunsMillis = 1000 * 60 * 30
+				numTestsPerEvictionRun = 3
+				minEvictableIdleTimeMillis = 1000 * 60 * 30
 			}
 		}
 		dataSource_user {
@@ -85,8 +88,8 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testuser"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
 				maxActive = -1
 				maxIdle = 5

@@ -1,13 +1,13 @@
 package net.nosegrind
 
-import org.springframework.security.access.annotation.Secured
+import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import net.nosegrind.apitoolkit.*
 import net.nosegrind.apitoolkit.Api
 import net.nosegrind.apitoolkit.ApiStatuses
 
-@Secured(['ROLE_USER'])
+@Secured(['IS_AUTHENTICATED_FULLY'])
 class TestController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -35,11 +35,11 @@ class TestController {
 	}
 	
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="GET",name='Test',description="Get test data",roles=['permitAll'])
     def show() {
-		//println("show called...")
-		respond Test.get(params.id)
-		return
+		if(apiToolkitService.isApiCall()){
+			//println("show called...")
+			respond Test.get(params.id)
+		}
     }
 
     def create() {
@@ -48,7 +48,6 @@ class TestController {
 
     @Transactional
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="PUT",name='Test',description="Create test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def save() {
 		Test testInstance = new Test()
 		testInstance.testdata = params.testdata
@@ -79,7 +78,6 @@ class TestController {
 
     @Transactional
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
-	@Api(method="POST",name='Test',description="Update test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def update(Test testInstance) {
 		println("update called...")
 		if(apiToolkitService.isApiCall()){

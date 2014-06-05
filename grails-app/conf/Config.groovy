@@ -10,6 +10,11 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
+import org.apache.log4j.*
+
+String appName = grailsApplication.metadata['app.name']
+
+grails.config.locations = ["file:${userHome}/.test/test.properties"]
 
 grails.war.dependencies = {
 	fileset(dir: "libs") {
@@ -91,36 +96,50 @@ grails.hibernate.cache.queries = false
 
 environments {
     development {
+
+    log4j = {
+      appenders {
+        file name: 'grailsfile', file: 'target/grails.log'
+        file name: 'rootlog', file: 'target/root.log'
+        file name: 'devfile', file: 'target/development.log',
+          layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
+      }
+      root { error 'stdout', 'rootlog' }
+      info additivity: false, grailsfile: 'org.codehaus.groovy.grails.commons'
+      all additivity: false, devfile: [
+		  'grails.app.controllers.net.nosegrind',
+		  'grails.app.domain.net.nosegrind',
+		  'grails.app.services.net.nosegrind.apitoolkit',
+		  'grails.app.taglib.net.nosegrind.apitoolkit',
+		  'grails.app.conf.your.package',
+		  'grails.app.filters.your.package'
+	  	]
+     }
+
+		
         grails.logging.jul.usebridge = true
 		grails.app.context = "/"
 		grails.serverURL = "http://localhost:8080"
     }
     production {
+		log4j = {
+			//trace 'org.hibernate.type'
+			// debug 'org.hibernate.SQL'
+			//debug 'org.springframework.security'
+
+			root {
+			    error()
+				//debug 'stdout', 'file'
+			    additivity = true
+			}
+		}
+		
         grails.logging.jul.usebridge = false
 		grails.app.context = "/"
     }
 }
 
-// log4j configuration
-log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
 
-    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
-           'org.codehaus.groovy.grails.web.pages',          // GSP
-           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
-           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
-           'org.codehaus.groovy.grails.commons',            // core / classloading
-           'org.codehaus.groovy.grails.plugins',            // plugins
-           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
-}
 
 // Added by the Api Toolkit plugin
 apitoolkit.apiName = 'api'
@@ -139,26 +158,31 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'net.nosegrind.
 grails.plugin.springsecurity.authority.className = 'net.nosegrind.apitoolkit.Role'
 
 grails.plugin.springsecurity.rememberMe.alwaysRemember = true
-grails.plugin.springsecurity.rememberMe.cookieName="test"
+grails.plugin.springsecurity.rememberMe.cookieName="apiTest"
 grails.plugin.springsecurity.rememberMe.key="_grails_"
-grails.plugin.springsecurity.rememberMe.persistent = false
-//grails.plugins.springsecurity.rememberMe.persistentToken.domainClassName = 'net.nosegrind.apitoolkit.PersistentLogin'
+//grails.plugin.springsecurity.rememberMe.persistent = true
+//grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'net.nosegrind.apitoolkit.PersistentLogin'
 //grails.plugin.springsecurity.auth.forceHttps=true
 
-grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.rememberMe.useSecureCookie = false
 
+grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.ui.encodePassword = false
 
+grails.plugin.springsecurity.auth.loginFormUrl = '/j_spring_security_check'
+grails.plugin.springsecurity.auth.ajaxLoginFormUrl ='/j_spring_security_check'
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/'
+grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/'
+
+//grails.plugin.springsecurity.successHandler.alwaysUseDefaultTargetUrl = false
+//grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
+
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
-	'/**':               ['permitAll'],
-	'/index':          ['permitAll'],
-	'/index.gsp':      ['permitAll'],
-	'/urls.html':      ['permitAll'],
-	'/**/js/**':       ['permitAll'],
-	'/**/css/**':      ['permitAll'],
-	'/**/images/**':   ['permitAll'],
-	'/**/favicon.ico': ['permitAll'],
-	'login/**':			['permitAll']
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
 ]
-
-
