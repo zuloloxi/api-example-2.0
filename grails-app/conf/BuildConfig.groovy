@@ -7,7 +7,7 @@ grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
-grails.tomcat.nio=true
+//grails.tomcat.nio=true
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -16,6 +16,7 @@ grails.project.fork = [
     test: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, daemon:true],
     // configure settings for the run-app JVM
     run: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, forkReserve:false],
+	
     // configure settings for the run-war JVM
     war: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, forkReserve:false],
     // configure settings for the Console UI JVM
@@ -56,7 +57,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.47"
+        build ":tomcat:7.0.52.1"
 
         // plugins for the compile step
         compile ":scaffolding:2.0.1"

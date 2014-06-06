@@ -7,7 +7,7 @@ import net.nosegrind.apitoolkit.*
 import net.nosegrind.apitoolkit.Api
 import net.nosegrind.apitoolkit.ApiStatuses
 
-@Secured(['IS_AUTHENTICATED_FULLY'])
+@Secured(["isAuthenticated()"])
 class TestController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -34,12 +34,14 @@ class TestController {
 		return
 	}
 	
-	@Secured(['ROLE_ADMIN','ROLE_USER'])
+	//@Secured(['ROLE_ADMIN','ROLE_USER'])
+	@Api(method="GET",name='Test',description="Get fred data",roles=['ROLE_ADMIN','ROLE_USER'])
     def show() {
 		if(apiToolkitService.isApiCall()){
-			//println("show called...")
+			println("show called...")
 			respond Test.get(params.id)
 		}
+		return
     }
 
     def create() {

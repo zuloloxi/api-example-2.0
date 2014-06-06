@@ -14,6 +14,8 @@ import org.apache.log4j.*
 
 String appName = grailsApplication.metadata['app.name']
 
+tomcat.nio=true
+
 grails.config.locations = ["file:${userHome}/.test/test.properties"]
 
 grails.war.dependencies = {
@@ -96,26 +98,25 @@ grails.hibernate.cache.queries = false
 
 environments {
     development {
-
-    log4j = {
-      appenders {
-        file name: 'grailsfile', file: 'target/grails.log'
-        file name: 'rootlog', file: 'target/root.log'
-        file name: 'devfile', file: 'target/development.log',
-          layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
-      }
-      root { error 'stdout', 'rootlog' }
-      info additivity: false, grailsfile: 'org.codehaus.groovy.grails.commons'
-      all additivity: false, devfile: [
-		  'grails.app.controllers.net.nosegrind',
-		  'grails.app.domain.net.nosegrind',
-		  'grails.app.services.net.nosegrind.apitoolkit',
-		  'grails.app.taglib.net.nosegrind.apitoolkit',
-		  'grails.app.conf.your.package',
-		  'grails.app.filters.your.package'
-	  	]
-     }
-
+	    log4j = {
+	      appenders {
+	        file name: 'grailsfile', file: 'target/grails.log'
+	        file name: 'rootlog', file: 'target/root.log'
+	        file name: 'devfile', file: 'target/development.log',
+	          layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
+	      }
+		  //debug 'org.springframework.security'
+	      root { error 'stdout', 'rootlog' }
+	      info additivity: false, grailsfile: 'org.codehaus.groovy.grails.commons'
+	      all additivity: false, devfile: [
+			  'grails.app.controllers.net.nosegrind',
+			  'grails.app.domain.net.nosegrind',
+			  'grails.app.services.net.nosegrind.apitoolkit',
+			  'grails.app.taglib.net.nosegrind.apitoolkit',
+			  'grails.app.conf.your.package',
+			  'grails.app.filters.your.package'
+		  	]
+	     }
 		
         grails.logging.jul.usebridge = true
 		grails.app.context = "/"
@@ -164,19 +165,10 @@ grails.plugin.springsecurity.rememberMe.key="_grails_"
 //grails.plugin.springsecurity.rememberMe.persistentToken.domainClassName = 'net.nosegrind.apitoolkit.PersistentLogin'
 //grails.plugin.springsecurity.auth.forceHttps=true
 
-grails.plugin.springsecurity.rememberMe.useSecureCookie = false
-
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.ui.encodePassword = false
 
-grails.plugin.springsecurity.auth.loginFormUrl = '/j_spring_security_check'
-grails.plugin.springsecurity.auth.ajaxLoginFormUrl ='/j_spring_security_check'
-grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/'
-grails.plugin.springsecurity.failureHandler.ajaxAuthFailUrl = '/'
-
-//grails.plugin.springsecurity.successHandler.alwaysUseDefaultTargetUrl = false
-//grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
-
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
@@ -184,5 +176,11 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+	'/**/favicon.ico':                ['permitAll'],
+	'/login/**':					  ['permitAll'],
+	'/logout/**':          		      ['permitAll']
 ]
+
+
+
+
