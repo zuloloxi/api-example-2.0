@@ -17,17 +17,17 @@ environments {
 			username = "yourlogin"
 			password = "yourpassword"
 			properties {
-				maxActive = -1
-				maxIdle = 5
-				minIdle = 0
-				initialSize = 1
+				maxActive = 50
+				maxIdle = 25
+				minIdle = 5
+				initialSize = 5
 				maxWait = 10000
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
+				minEvictableIdleTimeMillis=60000
+				timeBetweenEvictionRunsMillis=60000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=false
+				testOnReturn=true
 				validationQuery="SELECT 1"
 			}
 		}
@@ -40,17 +40,17 @@ environments {
 			username = "yourlogin"
 			password = "yourpassword"
 			properties {
-				maxActive = -1
-				maxIdle = 5
-				minIdle = 0
-				initialSize = 1
+				maxActive = 50
+				maxIdle = 25
+				minIdle = 5
+				initialSize = 5
 				maxWait = 10000
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
+				minEvictableIdleTimeMillis=60000
+				timeBetweenEvictionRunsMillis=60000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=false
+				testOnReturn=true
 				validationQuery="SELECT 1"
 			}
 		}
@@ -65,17 +65,17 @@ environments {
 			username = "yourlogin"
 			password = "yourpassword"
 			properties {
-				maxActive = -1
-				maxIdle = 5
-				minIdle = 0
-				initialSize = 1
+				maxActive = 50
+				maxIdle = 25
+				minIdle = 5
+				initialSize = 5
 				maxWait = 10000
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
+				minEvictableIdleTimeMillis=60000
+				timeBetweenEvictionRunsMillis=60000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=false
+				testOnReturn=true
 				validationQuery="SELECT 1"
 			}
 		}
@@ -88,17 +88,17 @@ environments {
 			username = "yourlogin"
 			password = "yourpassword"
 			properties {
-				maxActive = -1
-				maxIdle = 5
-				minIdle = 0
-				initialSize = 1
+				maxActive = 50
+				maxIdle = 25
+				minIdle = 5
+				initialSize = 5
 				maxWait = 10000
-				minEvictableIdleTimeMillis=1800000
-				timeBetweenEvictionRunsMillis=1800000
+				minEvictableIdleTimeMillis=60000
+				timeBetweenEvictionRunsMillis=60000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=false
+				testOnReturn=true
 				validationQuery="SELECT 1"
 			}
 		}
