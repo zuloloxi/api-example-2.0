@@ -8,20 +8,8 @@ grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 //grails.tomcat.nio=true
+grails.project.fork = false
 
-grails.project.fork = [
-    // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
-    //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
-
-    test: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, daemon:true],
-    // configure settings for the run-app JVM
-    run: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, forkReserve:false],
-	
-    // configure settings for the run-war JVM
-    war: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, forkReserve:false],
-    // configure settings for the Console UI JVM
-    console: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024]
-]
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
