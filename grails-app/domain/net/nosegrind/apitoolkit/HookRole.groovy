@@ -2,6 +2,8 @@ package net.nosegrind.apitoolkit
 
 import java.io.Serializable
 import java.util.Date
+import net.nosegrind.apitoolkit.Hook
+import net.nosegrind.apitoolkit.Role
 
 class HookRole implements Serializable {
 	
