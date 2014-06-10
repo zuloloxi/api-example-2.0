@@ -24,8 +24,9 @@ class Hook implements Serializable {
 		service()
 		attempts()
 	}
-	
+
 	static mapping = {
 		datasource 'user'
 	}
+
 }

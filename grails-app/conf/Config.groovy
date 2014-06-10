@@ -14,8 +14,6 @@ import org.apache.log4j.*
 
 String appName = grailsApplication.metadata['app.name']
 
-tomcat.nio=true
-
 grails.config.locations = ["file:${userHome}/.test/test.properties"]
 
 grails.war.dependencies = {
@@ -168,8 +166,9 @@ grails.plugin.springsecurity.rememberMe.key="_grails_"
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.ui.encodePassword = false
 
-grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+//grails.plugin.springsecurity.fii.rejectPublicInvocations = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/**':             ['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],
 	'/index.gsp':                     ['permitAll'],
@@ -184,3 +183,15 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 
 
 
+
+
+
+
+
+
+// Added by the Api Toolkit plugin:
+apitoolkit.apiName = 'api'
+apitoolkit.apichain.limit=3
+apitoolkit.attempts = 5
+apitoolkit.user.roles = ['ROLE_USER']
+apitoolkit.admin.roles = ['ROLE_ROOT','ROLE_ADMIN']

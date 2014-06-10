@@ -23,20 +23,15 @@ class TestController {
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
 	//@Api(method="GET",name='Test',description="Get fred data",roles=['ROLE_ADMIN','ROLE_USER'])
 	def fred() {
-		if(apiToolkitService.isApiCall()){
-			respond Test.get(params.id)
-			return
-		}
+		respond Test.get(params.id)
+		return
 	}
 
 	
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
 	//@Api(method="GET",name='Test',description="Get test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def show() {
-		if(apiToolkitService.isApiCall()){
-			println("show called...")
-			respond Test.get(params.id)
-		}
+		respond Test.get(params.id)
 		return
     }
 
@@ -55,18 +50,15 @@ class TestController {
 		
 		if(apiToolkitService.isApiCall()){
 		        if (testInstance == null) {
-		            println("tes is null")
 					return
 		        }
 		
 		        if (testInstance.hasErrors()) {
-					println("test has errors")
 		            respond testInstance.errors, view:'create'
 					return
 		        }
 		        
 			if (testInstance.save(flush:true)) {
-				println(testInstance)
 				respond testInstance
 			}
 		}
@@ -81,9 +73,7 @@ class TestController {
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
 	//@Api(method="POST",name='Test',description="Update test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def update(Test testInstance) {
-		println("update called...")
 		if(apiToolkitService.isApiCall()){
-			println("is api...")
 			testInstance.testdata = params.testdata
 
 	        if (testInstance == null){
@@ -97,7 +87,6 @@ class TestController {
 	        }
 	
 	        testInstance.save flush:true
-			println("instance saved...")
 			apiToolkitService.callHook('test',testInstance,'update')
 			respond Test.get(testInstance.id)
 			return

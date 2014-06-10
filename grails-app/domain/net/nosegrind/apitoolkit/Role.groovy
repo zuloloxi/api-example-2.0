@@ -16,9 +16,12 @@ class Role implements Serializable {
 		authority blank: false, unique: true
 	}
 	
+
 	static mapping = {
+		version false
 		datasource 'user'
 	}
+
 	
 	/*
 	static mapping = {

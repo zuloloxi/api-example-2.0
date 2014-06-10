@@ -55,9 +55,11 @@ class PersonRole implements Serializable {
 		executeUpdate 'DELETE FROM PersonRole WHERE role=:role', [role: role]
 	}
 
+
 	static mapping = {
 		datasource 'user'
 	}
+
 	
 	/*
 	static mapping = {

@@ -9,14 +9,12 @@ class BootStrap {
 
     def init = { servletContext ->
 		
-		//String testUser = 'admin'
-		//String testPassword = 'password'
-		
+
 
 		environments {
-			/*
 			production {}
 			development {
+				/*
 				Role rootRole = Role.findByAuthority('ROLE_ADMIN')?: new Role(authority:'ROLE_ADMIN').save(faileOnError:true)
 				Role userRole = Role.findByAuthority('ROLE_USER')?: new Role(authority:'ROLE_USER').save(faileOnError:true)
 		
@@ -35,11 +33,10 @@ class BootStrap {
 					
 					status.isCompleted()
 				}
-
-				
+				*/
 			}
 			test{}
-			*/
+
 		}
 
     }
