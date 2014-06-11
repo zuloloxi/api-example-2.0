@@ -1,4 +1,4 @@
-//grails.plugin.location.Restrpc='../grails-api-toolkit'
+grails.plugin.location.Restrpc='../grails-api-toolkit'
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -9,22 +9,6 @@ grails.project.source.level = 1.6
 grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.tomcat.nio=true
 grails.tomcat.jvmArgs = ["-Xms2048m", "-Xmx4096m", "-XX:PermSize=1024m", "-XX:MaxPermSize=2048m", "-XX:+CMSClassUnloadingEnabled", "-XX:+UseConcMarkSweepGC"]
-
-/*
-grails.project.fork = [
-    // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
-    //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
-
-    test: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, daemon:true],
-    // configure settings for the run-app JVM
-    run: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, forkReserve:false],
-	
-    // configure settings for the run-war JVM
-    war: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024, forkReserve:false],
-    // configure settings for the Console UI JVM
-    console: [maxMemory: 2048, minMemory: 512, debug: false, maxPerm: 1024]
-]
-*/
 
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
@@ -82,7 +66,7 @@ grails.project.dependency.resolution = {
 	compile ":famfamfam:1.0"
 	compile ":jquery-ui:1.10.3"
 	compile ":mail:1.0"
-	compile ":api-toolkit:2.0.8"
+	//compile ":api-toolkit:2.0.8"
 
 	// used for testing
 	test(":spock:0.7") {

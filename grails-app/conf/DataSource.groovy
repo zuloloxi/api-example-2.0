@@ -14,20 +14,20 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testdb"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
-				maxActive = 50
-				maxIdle = 25
-				minIdle = 5
-				initialSize = 5
+				maxActive = -1
+				maxIdle = 5
+				minIdle = 0
+				initialSize = 1
 				maxWait = 10000
-				minEvictableIdleTimeMillis=60000
-				timeBetweenEvictionRunsMillis=60000
+				minEvictableIdleTimeMillis=1800000
+				timeBetweenEvictionRunsMillis=1800000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=true
+				testOnReturn=false
 				validationQuery="SELECT 1"
 			}
 		}
@@ -37,20 +37,20 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testuser"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
-				maxActive = 50
-				maxIdle = 25
-				minIdle = 5
-				initialSize = 5
+				maxActive = -1
+				maxIdle = 5
+				minIdle = 0
+				initialSize = 1
 				maxWait = 10000
-				minEvictableIdleTimeMillis=60000
-				timeBetweenEvictionRunsMillis=60000
+				minEvictableIdleTimeMillis=1800000
+				timeBetweenEvictionRunsMillis=1800000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=true
+				testOnReturn=false
 				validationQuery="SELECT 1"
 			}
 		}
@@ -62,20 +62,20 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testdb"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
-				maxActive = 50
-				maxIdle = 25
-				minIdle = 5
-				initialSize = 5
+				maxActive = -1
+				maxIdle = 5
+				minIdle = 0
+				initialSize = 1
 				maxWait = 10000
-				minEvictableIdleTimeMillis=60000
-				timeBetweenEvictionRunsMillis=60000
+				minEvictableIdleTimeMillis=1800000
+				timeBetweenEvictionRunsMillis=1800000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=true
+				testOnReturn=false
 				validationQuery="SELECT 1"
 			}
 		}
@@ -85,20 +85,20 @@ environments {
 			driverClassName = "com.mysql.jdbc.Driver"
 			url = "jdbc:mysql://127.0.0.1/testuser"
 			dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-			username = "yourlogin"
-			password = "yourpassword"
+			username = "root"
+			password = "Ch335eB0y"
 			properties {
-				maxActive = 50
-				maxIdle = 25
-				minIdle = 5
-				initialSize = 5
+				maxActive = -1
+				maxIdle = 5
+				minIdle = 0
+				initialSize = 1
 				maxWait = 10000
-				minEvictableIdleTimeMillis=60000
-				timeBetweenEvictionRunsMillis=60000
+				minEvictableIdleTimeMillis=1800000
+				timeBetweenEvictionRunsMillis=1800000
 				numTestsPerEvictionRun=3
 				testOnBorrow=true
 				testWhileIdle=true
-				testOnReturn=true
+				testOnReturn=false
 				validationQuery="SELECT 1"
 			}
 		}
