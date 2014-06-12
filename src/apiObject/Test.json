@@ -23,7 +23,7 @@
             "test/show": {
              	"METHOD":"GET",
             	"DESCRIPTION":"Get test data",
-            	"ROLES":["permitAll"],
+            	"ROLES":["ROLE_ADMIN","ROLE_USER"],
                 "REQUEST": {
                     "permitAll":["id"]
                 },
@@ -34,9 +34,6 @@
                 }
             },
             "test/save": {
-             	"METHOD":"PUT",
-            	"DESCRIPTION":"Create test data",
-            	"ROLES":["ROLE_ADMIN","ROLE_USER"],
                 "REQUEST": {
                     "permitAll":["testdata"]
                 },
@@ -46,9 +43,6 @@
                 "ERROR":["304_NOT_MODIFIED"]
             },
             "test/update": {
-             	"METHOD":"POST",
-            	"DESCRIPTION":"Update test data",
-            	"ROLES":["ROLE_ADMIN","ROLE_USER"],
                 "REQUEST": {
                     "permitAll":["id","testdata"]
                 },

@@ -137,9 +137,6 @@ environments {
 		grails.app.context = "/"
     }
 }
-
-
-
 // Added by the Api Toolkit plugin
 apitoolkit.apiName = 'api'
 apitoolkit.attempts = 5

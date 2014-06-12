@@ -1,4 +1,4 @@
-grails.plugin.location.Restrpc='../grails-api-toolkit'
+//grails.plugin.location.Restrpc='../grails-api-toolkit'
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -66,7 +66,7 @@ grails.project.dependency.resolution = {
 	compile ":famfamfam:1.0"
 	compile ":jquery-ui:1.10.3"
 	compile ":mail:1.0"
-	//compile ":api-toolkit:2.0.8"
+	compile ":api-toolkit:2.0.9"
 
 	// used for testing
 	test(":spock:0.7") {
