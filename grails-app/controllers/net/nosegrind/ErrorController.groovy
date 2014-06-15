@@ -10,11 +10,7 @@ class ErrorController {
     }
 
 	def error() {
-		
-		println "################################################"
-		println request.exception
-		println request.exception.cause
-		println "################################################"
+		respond request.exception
 		return
 	}
 }

@@ -7,7 +7,6 @@
 */
 
 {
-    "test": {
         "VALUES": {
             "id": {
                 "type": "PKEY",
@@ -52,5 +51,4 @@
                 "ERROR":["304_NOT_MODIFIED"]
             }
         }
-    }
 }
