@@ -12,7 +12,7 @@
 // }
 import org.apache.log4j.*
 
-String appName = grailsApplication.metadata['app.name']
+//appName = grailsApplication.metadata['app.name']
 
 grails.config.locations = ["file:${userHome}/.test/test.properties"]
 
@@ -22,7 +22,7 @@ grails.war.dependencies = {
 	}
 }
 
-grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
+grails.project.groupId = "${appName}" // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
 grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
@@ -178,17 +178,3 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 
 
-
-
-
-
-
-
-
-
-// Added by the Api Toolkit plugin:
-apitoolkit.apiName = 'api'
-apitoolkit.apichain.limit=3
-apitoolkit.attempts = 5
-apitoolkit.user.roles = ['ROLE_USER']
-apitoolkit.admin.roles = ['ROLE_ROOT','ROLE_ADMIN']

@@ -23,7 +23,7 @@ class ApidocController {
 			if(cache){
 				
 				cache.each(){ it ->
-					def newDocs=apiToolkitService.generateDoc(controllername, it.key)
+					def newDocs=apiToolkitService.generateDoc(controllername, it.key,params.apiObject)
 					if(newDocs){
 						if(!docs["$controllername"]){
 							docs["${controllername}"] = [:]
