@@ -20,7 +20,7 @@ class TestController {
         respond Test.list(params), model:[testInstanceCount: Test.count()]
     }
 
-	@Secured(['ROLE_ADMIN','ROLE_USER'])
+	//@Secured(['ROLE_ADMIN','ROLE_USER'])
 	//@Api(method="GET",name='Test',description="Get fred data",roles=['ROLE_ADMIN','ROLE_USER'])
 	def fred() {
 		respond Test.get(params.id)
@@ -28,7 +28,7 @@ class TestController {
 	}
 
 	
-	@Secured(['ROLE_ADMIN','ROLE_USER'])
+	//@Secured(['ROLE_ADMIN','ROLE_USER'])
 	//@Api(method="GET",name='Test',description="Get test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def show() {
 		respond Test.get(params.id)
@@ -73,7 +73,6 @@ class TestController {
 	@Secured(['ROLE_ADMIN','ROLE_USER'])
 	//@Api(method="POST",name='Test',description="Update test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def update(Test testInstance) {
-		if(apiToolkitService.isApiCall()){
 			testInstance.testdata = params.testdata
 
 	        if (testInstance == null){
@@ -87,15 +86,14 @@ class TestController {
 	        }
 	
 	        testInstance.save flush:true
-			apiToolkitService.callHook('test',testInstance,'update')
+			//apiToolkitService.callHook('test',testInstance,'update')
 			respond Test.get(testInstance.id)
 			return
-		}
 
     }
 
     @Transactional
-	@Secured(['ROLE_ADMIN','ROLE_USER'])
+	//@Secured(['ROLE_ADMIN','ROLE_USER'])
     def delete() {
 		Test testInstance = new Test(params)
         if (testInstance == null) {
