@@ -319,6 +319,7 @@
 					<g:set var="actionName" value="${action.key}"/>
 					<g:each in="${action.value}" var="vers">
 						<g:set var="version" value="${vers.key}"/>
+
 						<g:if test="${vers.value.method}"><g:set var="methods" value="${vers.value.method}"/></g:if>
 						<g:if test="${vers.value.method}"><g:set var="method" value="${vers.value.method.replace('[','').replace(']','').split(',').findAll{ it =~ /(GET|PUT|POST|DELETE|PATCH|TRACE)/ }[0]?.toLowerCase()}"/></g:if>
 						<g:if test="${vers.value.path}">

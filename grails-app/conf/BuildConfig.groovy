@@ -1,4 +1,4 @@
-//grails.plugin.location.Restrpc='../grails-api-toolkit'
+grails.plugin.location.Restrpc='../grails-api-toolkit'
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -61,18 +61,19 @@ grails.project.dependency.resolution = {
         //runtime ":zipped-resources:1.0.1"
         //runtime ":cached-resources:1.1"
         //runtime ":yui-minify-resources:0.1.5"
-	compile ":spring-security-core:2.0-RC3"
-	// compile ":spring-security-ui:1.0-RC1"
-	compile ":famfamfam:1.0"
-	compile ":jquery-ui:1.10.3"
-	compile ":mail:1.0"
-	compile ":api-toolkit:2.1.0"
-
-	// used for testing
-	test(":spock:0.7") {
-		export=false
-		exclude "spock-grails-support"
-	}
-	compile ":rest:0.8"
+		// compile ":spring-security-core:2.0-RC3"
+		// compile ":spring-security-ui:1.0-RC1"
+		compile ":famfamfam:1.0"
+		compile ":jquery-ui:1.10.3"
+		compile ":mail:1.0"
+		//compile ":api-toolkit:2.1.2"
+	
+		// used for testing
+		test(":spock:0.7") {
+			export=false
+			exclude "spock-grails-support"
+		}
+		compile ":rest:0.8"
+		//compile ":profiler:0.5"
     }
 }

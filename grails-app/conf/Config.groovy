@@ -12,8 +12,6 @@
 // }
 import org.apache.log4j.*
 
-//appName = grailsApplication.metadata['app.name']
-
 grails.config.locations = ["file:${userHome}/.test/test.properties"]
 
 grails.war.dependencies = {
@@ -104,8 +102,12 @@ environments {
 	          layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
 	      }
 		  //debug 'org.springframework.security'
+
 	      root { error 'stdout', 'rootlog' }
-	      info additivity: false, grailsfile: 'org.codehaus.groovy.grails.commons'
+	      info additivity: false, grailsfile:[
+			  'org.codehaus.groovy.grails.commons',
+			  'com.linkedin.grails'
+			 ]
 	      all additivity: false, devfile: [
 			  'grails.app.controllers.net.nosegrind',
 			  'grails.app.domain.net.nosegrind',
@@ -119,6 +121,8 @@ environments {
         grails.logging.jul.usebridge = true
 		grails.app.context = "/"
 		grails.serverURL = "http://localhost:8080"
+		
+		apitoolkit.apiobjectSrc = 'src/apiObject'
     }
     production {
 		log4j = {
@@ -135,14 +139,19 @@ environments {
 		
         grails.logging.jul.usebridge = false
 		grails.app.context = "/"
+		
+		apitoolkit.apiobjectSrc = 'WEB-INF/classes/apiObject'
     }
 }
+
 // Added by the Api Toolkit plugin
 apitoolkit.apiName = 'api'
 apitoolkit.attempts = 5
 apitoolkit.apichain.limit=3
 apitoolkit.user.roles = ['ROLE_USER']
 apitoolkit.admin.roles = ['ROLE_ROOT','ROLE_ADMIN']
+apitoolkit.apiRoot = (grailsApplication.config.apitoolkit.apiName)?"${grailsApplication.config.apitoolkit.apiName}_v${grailsApplication.metadata['app.version']}":"v${grailsApplication.metadata['app.version']}"
+
 
 // Added by the Api Toolkit plugin:
 apitoolkit.domain = 'net.nosegrind.apitoolkit.Hook'

@@ -12,7 +12,7 @@ class TestController {
 
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-	def apiToolkitService
+	def apiLayerService
 	ApiStatuses error = new ApiStatuses()
 	
     def index(Integer max) {
@@ -24,7 +24,7 @@ class TestController {
 	//@Api(method="GET",name='Test',description="Get fred data",roles=['ROLE_ADMIN','ROLE_USER'])
 	def fred() {
 		respond Test.get(params.id)
-		return
+		return null
 	}
 
 	
@@ -32,7 +32,7 @@ class TestController {
 	//@Api(method="GET",name='Test',description="Get test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def show() {
 		respond Test.get(params.id)
-		return
+		return null
     }
 
 /*
@@ -48,7 +48,7 @@ class TestController {
 		Test testInstance = new Test()
 		testInstance.testdata = params.testdata
 		
-		if(apiToolkitService.isApiCall()){
+		if(apiLayerService.isApiCall()){
 		        if (testInstance == null) {
 					return
 		        }
@@ -70,25 +70,26 @@ class TestController {
     }
 
     @Transactional
-	@Secured(['ROLE_ADMIN','ROLE_USER'])
+	//@Secured(['ROLE_ADMIN','ROLE_USER'])
 	//@Api(method="POST",name='Test',description="Update test data",roles=['ROLE_ADMIN','ROLE_USER'])
     def update(Test testInstance) {
+		println("update called")
 			testInstance.testdata = params.testdata
 
 	        if (testInstance == null){
 				error._404_NOT_FOUND().send()
-				return
+				return null
 	        }
 	
 	        if (testInstance.hasErrors()) {
 				error._404_NOT_FOUND().send()
-				return
+				return null
 	        }
 	
 	        testInstance.save flush:true
 			//apiToolkitService.callHook('test',testInstance,'update')
 			respond Test.get(testInstance.id)
-			return
+			return null
 
     }
 

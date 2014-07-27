@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.commons.DefaultGrailsControllerClass
 @Secured('permitAll')
 class ApidocController {
 
-	def apiToolkitService
+	def apiLayerService
 	def apiCacheService
 	def springSecurityService
 	
@@ -22,17 +22,19 @@ class ApidocController {
 			def cache = apiCacheService.getApiCache(controllername)
 			if(cache){
 				cache.each(){ it ->
-					String actionname = it.key
-					it.value.each(){ it2 ->
-						def newDocs=apiToolkitService.generateDoc(controllername, actionname,it2.key)
-						if(newDocs){
-							if(!docs["$controllername"]){
-								docs["${controllername}"] = [:]
+					if(it.key!='currentStable'){
+						String actionname = it.key
+						it.value.each(){ it2 ->
+							def newDocs=apiLayerService.generateDoc(controllername, actionname,it2.key.toString())
+							if(newDocs){
+								if(!docs["$controllername"]){
+									docs["${controllername}"] = [:]
+								}
+								if(!docs["$controllername"]["${actionname}"]){
+									docs["${controllername}"]["${actionname}"] = [:]
+								}
+								docs["${controllername}"]["${actionname}"]["${it2.key}"]=newDocs["${actionname}"]["${it2.key}"]
 							}
-							if(!docs["$controllername"]["${actionname}"]){
-								docs["${controllername}"]["${actionname}"] = [:]
-							}
-							docs["${controllername}"]["${actionname}"]["${it2.key}"]=newDocs["${actionname}"]["${it2.key}"]
 						}
 					}
 				}
