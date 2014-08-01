@@ -148,6 +148,8 @@ environments {
 apitoolkit.apiName = 'api'
 apitoolkit.attempts = 5
 apitoolkit.apichain.limit=3
+apitoolkit.chaining.enabled=true
+apitoolkit.batching.enabled=true
 apitoolkit.user.roles = ['ROLE_USER']
 apitoolkit.admin.roles = ['ROLE_ROOT','ROLE_ADMIN']
 apitoolkit.apiRoot = (grailsApplication.config.apitoolkit.apiName)?"${grailsApplication.config.apitoolkit.apiName}_v${grailsApplication.metadata['app.version']}":"v${grailsApplication.metadata['app.version']}"
