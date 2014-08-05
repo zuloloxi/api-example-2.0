@@ -1,5 +1,6 @@
 package net.nosegrind
 
+import javax.servlet.http.HttpServletResponse
 import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
