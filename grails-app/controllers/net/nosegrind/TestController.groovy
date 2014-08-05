@@ -5,7 +5,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import net.nosegrind.apitoolkit.*
 import net.nosegrind.apitoolkit.Api
-import net.nosegrind.apitoolkit.ApiStatuses
+
 
 @Secured(["isAuthenticated()"])
 class TestController {
@@ -13,7 +13,7 @@ class TestController {
     //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 	def apiLayerService
-	ApiStatuses error = new ApiStatuses()
+
 	
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -77,12 +77,12 @@ class TestController {
 			testInstance.testdata = params.testdata
 
 	        if (testInstance == null){
-				error._404_NOT_FOUND().send()
+				render(status:HttpServletResponse.SC_NOT_FOUND)
 				return null
 	        }
 	
 	        if (testInstance.hasErrors()) {
-				error._404_NOT_FOUND().send()
+				render(status:HttpServletResponse.SC_NOT_FOUND)
 				return null
 	        }
 	
@@ -103,25 +103,8 @@ class TestController {
         }
 
         testInstance.delete flush:true
-
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Test.label', default: 'Test'), testInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
     }
 
-    protected void notFound() {
-        request.withFormat {
-            form {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'testInstance.label', default: 'Test'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
 	
 	@Secured('permitAll')
 	def test(){
