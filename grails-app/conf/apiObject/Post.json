@@ -1,0 +1,139 @@
+/* JSON API Object */
+/* ****************************************************************************
+ * Copyright 2014 Owen Rubel
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed is distributed on an "AS IS" BASIS,WITHOUT WARRANTIES 
+ * OR CONDITIONS OF ANY KIND, either express or implied.
+ *****************************************************************************/
+// NOTES
+
+/* 'permitAll' needs to always come first so other roles can make use of it
+* as they come afterward
+*/
+
+	
+{
+    "VALUES": {
+        "id": {
+            "type": "PKEY",
+            "description":"ID for Post"
+        },
+        "title": {
+            "type": "String",
+            "description":"Post Title"
+        },
+        "teaser": {
+            "type": "String",
+            "description":"Post Teaser"
+        },
+        "content": {
+            "type": "String",
+            "description":"Post Content"
+        },
+        "creationDate": {
+            "type": "Date",
+            "description":"Creation Date"
+        },
+        "modifiedDate": {
+            "type": "Date",
+            "description":"Last Modified Date"
+        },
+        "endCommentsDate": {
+            "type": "Date",
+            "description":"End Comments Date"
+        },
+        "author": {
+            "type": "FKEY",
+            "description":"Author of Post"
+        },
+        "statId": {
+            "type": "FKEY",
+            "description":"Status of Post"
+        },
+        "sectionId": {
+            "type": "FKEY",
+            "description":"Section of Post"
+        }
+    },
+	"CURRENTSTABLE": "1",
+	"VERSION": {
+		"1": {
+			"DEFAULTACTION":"post/list",
+	        "URI": {
+	        	"post/list": {
+	             	"METHOD":"GET",
+	            	"DESCRIPTION":"List Posts",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                	"permitAll":[]
+	                },
+	                "RESPONSE": {
+	                	"permitAll":["id","title","sectionId","statId"]
+	                }
+	        	},
+	        	"post/listBySection": {
+	             	"METHOD":"GET",
+	            	"DESCRIPTION":"List Posts By Section",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                	"permitAll":["sectionId"]
+	                },
+	                "RESPONSE": {
+	                	"permitAll":["id","title","sectionId","statId"]
+	                }
+	        	},
+	            "post/show": {
+	             	"METHOD":"GET",
+	            	"DESCRIPTION":"Show Post",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["id"]
+	                },
+	                "RESPONSE": {
+	                	"permitAll":["id","title","sectionId","statId"]
+	                }
+	            },
+	            "post/save": {
+	            	"METHOD":"PUT",
+	            	"DESCRIPTION":"Create Post",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["title","teaser","content","sectionId"]
+	                },
+	                "RESPONSE": {
+	                    "permitAll":["id"]
+	                }
+	            },
+	            "post/update": {
+	            	"METHOD":"POST",
+	            	"DESCRIPTION":"Update Post",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["id","title","sectionId","statId"]
+	                },
+	                "RESPONSE": {
+	                    "permitAll":["id"]
+	                }
+	            },
+	            "post/delete": {
+	            	"METHOD":"DELETE",
+	            	"DESCRIPTION":"Delete Post",
+	            	"ROLES":["ROLE_ADMIN"],
+	            	"BATCH":["ROLE_ADMIN"],
+	                "REQUEST": {
+	                    "permitAll":["id"]
+	                },
+	                "RESPONSE": {
+	                    "permitAll":["id"]
+	                }
+	            }
+	        }
+		}
+	}
+}

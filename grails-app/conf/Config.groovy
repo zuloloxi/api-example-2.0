@@ -10,7 +10,7 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
-import org.apache.log4j.*
+//import org.apache.log4j.*
 
 grails.config.locations = ["file:${userHome}/.test/test.properties"]
 
@@ -92,6 +92,8 @@ grails.exceptionresolver.params.exclude = ['password']
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
 
+//tomcat.nio=true
+
 environments {
     development {
 	    log4j = {
@@ -103,7 +105,7 @@ environments {
 	      }
 		  //debug 'org.springframework.security'
 
-	      root { error 'stdout', 'rootlog' }
+	      root { error 'stdout', 'root.log' }
 	      info additivity: false, grailsfile:[
 			  'org.codehaus.groovy.grails.commons',
 			  'com.linkedin.grails'
@@ -122,7 +124,7 @@ environments {
 		grails.app.context = "/"
 		grails.serverURL = "http://localhost:8080"
 		
-		apitoolkit.apiobjectSrc = 'src/apiObject'
+		apitoolkit.apiobjectSrc = 'grails-app/conf/apiObject'
     }
     production {
 		log4j = {
@@ -140,7 +142,7 @@ environments {
         grails.logging.jul.usebridge = false
 		grails.app.context = "/"
 		
-		apitoolkit.apiobjectSrc = 'WEB-INF/classes/apiObject'
+		apitoolkit.apiobjectSrc = 'webapps/test/WEB-INF/classes/apiObject'
     }
 }
 
@@ -150,14 +152,15 @@ apitoolkit.attempts = 5
 apitoolkit.apichain.limit=3
 apitoolkit.chaining.enabled=true
 apitoolkit.batching.enabled=true
+apitoolkit.localauth.enabled=false
 apitoolkit.user.roles = ['ROLE_USER']
 apitoolkit.admin.roles = ['ROLE_ROOT','ROLE_ADMIN']
 apitoolkit.apiRoot = (grailsApplication.config.apitoolkit.apiName)?"${grailsApplication.config.apitoolkit.apiName}_v${grailsApplication.metadata['app.version']}":"v${grailsApplication.metadata['app.version']}"
 
 
 // Added by the Api Toolkit plugin:
-apitoolkit.domain = 'net.nosegrind.apitoolkit.Hook'
-apitoolkit.controller = 'net.nosegrind.apitoolkit.HookController'
+//apitoolkit.domain = 'net.nosegrind.apitoolkit.Hook'
+//apitoolkit.controller = 'net.nosegrind.apitoolkit.HookController'
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'net.nosegrind.apitoolkit.Person'
