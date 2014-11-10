@@ -1,4 +1,3 @@
-grails.plugin.location.Restrpc="${userHome}/workspace/grails-api-toolkit"
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -58,11 +57,10 @@ grails.project.dependency.resolution = {
         compile (":hibernate:3.6.10.7")
 		//runtime ':hibernate4:4.3.5.2' // or ':hibernate:3.6.10.14'
 		runtime ':database-migration:1.4.0'
-        //runtime ":resources:1.2.1"
 
-        // Uncomment these (or add new ones) to enable additional resources capabilities
 		compile(":spring-security-core:2.0-RC4")
-	
+		compile(":api-toolkit:2.2")
+		
 		// used for testing
 		test(":spock:0.7") {
 			exclude "spock-grails-support"
