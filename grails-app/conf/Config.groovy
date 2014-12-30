@@ -149,6 +149,7 @@ environments {
 // Added by the Api Toolkit plugin
 apitoolkit.apiName = 'api'
 apitoolkit.attempts = 5
+apitoolkit.apiobjectSrc = 'src/apiObjects'
 apitoolkit.apichain.limit=3
 apitoolkit.chaining.enabled=true
 apitoolkit.batching.enabled=true
