@@ -2,7 +2,7 @@ package net.nosegrind
 
 import java.io.Serializable;
 import java.util.Date;
-import groovy.sql.Sql
+//import groovy.sql.Sql
 
 //@Typed(TypePolicy.MIXED)
 class Post implements Serializable{
@@ -13,7 +13,7 @@ class Post implements Serializable{
 	String teaser
 	String content
 	Date creationDate = new Date()
-	Date modifiedDate
+	Date modifiedDate = new Date()
 	Date endCommentsDate
 	Integer author
 	Status stat

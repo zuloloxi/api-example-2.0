@@ -12,7 +12,7 @@
 // }
 //import org.apache.log4j.*
 
-grails.config.locations = ["file:${userHome}/.test/test.properties"]
+grails.config.locations = ["file:${System.properties.'user.home'}/.test/test.properties"]
 
 grails.war.dependencies = {
 	fileset(dir: "libs") {
@@ -95,6 +95,37 @@ grails.hibernate.cache.queries = false
 //tomcat.nio=true
 
 environments {
+	test {
+		log4j = {
+		  appenders {
+			file name: 'grailsfile', file: 'target/grails.log'
+			file name: 'rootlog', file: 'target/root.log'
+			file name: 'devfile', file: 'target/development.log',
+			  layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
+		  }
+		  //debug 'org.springframework.security'
+
+		  root { error 'stdout', 'root.log' }
+		  info additivity: false, grailsfile:[
+			  'org.codehaus.groovy.grails.commons',
+			  'com.linkedin.grails'
+			 ]
+		  all additivity: false, devfile: [
+			  'grails.app.controllers.net.nosegrind',
+			  'grails.app.domain.net.nosegrind',
+			  'grails.app.services.net.nosegrind.apitoolkit',
+			  'grails.app.taglib.net.nosegrind.apitoolkit',
+			  'grails.app.conf.your.package',
+			  'grails.app.filters.your.package'
+			  ]
+		 }
+		
+		grails.logging.jul.usebridge = true
+		grails.app.context = "/"
+		grails.serverURL = "http://localhost:8080"
+		
+		apitoolkit.apiobjectSrc = 'grails-app/conf/apiObject'
+	}
     development {
 	    log4j = {
 	      appenders {
@@ -132,10 +163,15 @@ environments {
 			// debug 'org.hibernate.SQL'
 			//debug 'org.springframework.security'
 
+			appenders {
+				console name: 'stdout', layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
+			}
+			  //debug 'org.springframework.security'
+			
 			root {
-			    error()
+				error()
 				//debug 'stdout', 'file'
-			    additivity = true
+				additivity = true
 			}
 		}
 		
@@ -146,18 +182,18 @@ environments {
     }
 }
 
+grails.views.javascript.library="jquery"
+
 // Added by the Api Toolkit plugin
 apitoolkit.apiName = 'api'
 apitoolkit.attempts = 5
-apitoolkit.apiobjectSrc = 'src/apiObjects'
 apitoolkit.apichain.limit=3
 apitoolkit.chaining.enabled=true
 apitoolkit.batching.enabled=true
-apitoolkit.localauth.enabled=false
+apitoolkit.localauth.enabled=true
 apitoolkit.user.roles = ['ROLE_USER']
 apitoolkit.admin.roles = ['ROLE_ROOT','ROLE_ADMIN']
 apitoolkit.apiRoot = (grailsApplication.config.apitoolkit.apiName)?"${grailsApplication.config.apitoolkit.apiName}_v${grailsApplication.metadata['app.version']}":"v${grailsApplication.metadata['app.version']}"
-
 
 // Added by the Api Toolkit plugin:
 //apitoolkit.domain = 'net.nosegrind.apitoolkit.Hook'

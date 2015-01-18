@@ -10,14 +10,21 @@
 
 /* 'permitAll' needs to always come first so other roles can make use of it
 * as they come afterward
+
+net.nosegrind.Post
 */
 
 	
 {
+	"NAME":"post",
     "VALUES": {
         "id": {
             "type": "PKEY",
             "description":"ID for Post"
+        },
+        "version": {
+            "type": "Long",
+            "description":"Version for Updating Post"
         },
         "title": {
             "type": "String",
@@ -44,7 +51,7 @@
             "description":"End Comments Date"
         },
         "author": {
-            "type": "FKEY",
+            "type": "Long",
             "description":"Author of Post"
         },
         "statId": {
@@ -59,9 +66,10 @@
 	"CURRENTSTABLE": "1",
 	"VERSION": {
 		"1": {
-			"DEFAULTACTION":"post/list",
+			"DOMAINPACKAGE":"",
+			"DEFAULTACTION":"list",
 	        "URI": {
-	        	"post/list": {
+	        	"list": {
 	             	"METHOD":"GET",
 	            	"DESCRIPTION":"List Posts",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -70,10 +78,10 @@
 	                	"permitAll":[]
 	                },
 	                "RESPONSE": {
-	                	"permitAll":["id","title","sectionId","statId"]
+	                	"permitAll":["id","title","sectionId","statId","version"]
 	                }
 	        	},
-	        	"post/listBySection": {
+	        	"listBySection": {
 	             	"METHOD":"GET",
 	            	"DESCRIPTION":"List Posts By Section",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -82,10 +90,10 @@
 	                	"permitAll":["sectionId"]
 	                },
 	                "RESPONSE": {
-	                	"permitAll":["id","title","sectionId","statId"]
+	                	"permitAll":["id","title","sectionId","statId","version"]
 	                }
 	        	},
-	            "post/show": {
+	            "show": {
 	             	"METHOD":"GET",
 	            	"DESCRIPTION":"Show Post",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -94,34 +102,34 @@
 	                    "permitAll":["id"]
 	                },
 	                "RESPONSE": {
-	                	"permitAll":["id","title","sectionId","statId"]
+	                	"permitAll":["id","title","sectionId","statId","version"]
 	                }
 	            },
-	            "post/save": {
-	            	"METHOD":"PUT",
+	            "create": {
+	            	"METHOD":"POST",
 	            	"DESCRIPTION":"Create Post",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
 	                "REQUEST": {
-	                    "permitAll":["title","teaser","content","sectionId"]
+	                    "permitAll":["title","teaser","content","sectionId","author"]
 	                },
 	                "RESPONSE": {
-	                    "permitAll":["id"]
+	                    "permitAll":["id","version"]
 	                }
 	            },
-	            "post/update": {
-	            	"METHOD":"POST",
+	            "update": {
+	            	"METHOD":"PUT",
 	            	"DESCRIPTION":"Update Post",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
 	                "REQUEST": {
-	                    "permitAll":["id","title","sectionId","statId"]
+	                    "permitAll":["id","title","version"]
 	                },
 	                "RESPONSE": {
-	                    "permitAll":["id"]
+	                    "permitAll":["id","version"]
 	                }
 	            },
-	            "post/delete": {
+	            "delete": {
 	            	"METHOD":"DELETE",
 	            	"DESCRIPTION":"Delete Post",
 	            	"ROLES":["ROLE_ADMIN"],

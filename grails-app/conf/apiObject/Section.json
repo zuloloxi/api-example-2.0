@@ -13,26 +13,28 @@
 */
 
 {
+	"NAME":"session",
     "VALUES": {
         "id": {
             "type": "PKEY",
             "description":"ID for Section"
         },
+        "version": {
+            "type": "Long",
+            "description":"Version for Updating Section"
+        },
         "sectionName": {
             "type": "String",
             "description":"Name of Section"
-        },
-        "commentsAllowed": {
-            "type": "Boolean",
-            "description":"Are comments allowed"
         }
     },
 	"CURRENTSTABLE": "1",
 	"VERSION": {
 		"1": {
-			"DEFAULTACTION":"section/list",
+	        "DOMAINPACKAGE":"",
+			"DEFAULTACTION":"list",
 	        "URI": {
-	        	"section/list": {
+	        	"list": {
 	             	"METHOD":"GET",
 	            	"DESCRIPTION":"List Sections",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -41,10 +43,10 @@
 	                	"permitAll":[]
 	                },
 	                "RESPONSE": {
-	                	"permitAll":["id","sectionName","commentsAllowed"]
+	                	"permitAll":["id","sectionName","version"]
 	                }
 	        	},
-	            "section/show": {
+	            "show": {
 	             	"METHOD":"GET",
 	            	"DESCRIPTION":"Show Section",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -53,36 +55,36 @@
 	                    "permitAll":["id"]
 	                },
 	                "RESPONSE": {
-	                	"permitAll":["id","sectionName","commentsAllowed"]
+	                	"permitAll":["id","sectionName","version"]
 	                }
 	            },
-	            "section/save": {
+	            "save": {
 	            	"METHOD":"PUT",
 	            	"DESCRIPTION":"Create Section",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
 	                "REQUEST": {
-	                    "permitAll":["sectionName","commentsAllowed"]
+	                    "permitAll":["sectionName"]
 	                },
 	                "RESPONSE": {
-	                    "permitAll":["id"]
+	                    "permitAll":["id","version"]
 	                },
 	                "ERROR":["304_NOT_MODIFIED"]
 	            },
-	            "section/update": {
+	            "update": {
 	            	"METHOD":"POST",
 	            	"DESCRIPTION":"Update Section",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
 	                "REQUEST": {
-	                    "permitAll":["id","sectionName","commentsAllowed"]
+	                    "permitAll":["id","sectionName"]
 	                },
 	                "RESPONSE": {
-	                    "permitAll":["id"]
+	                    "permitAll":["id","version"]
 	                },
 	                "ERROR":["304_NOT_MODIFIED"]
 	            },
-	            "section/delete": {
+	            "delete": {
 	            	"METHOD":"DELETE",
 	            	"DESCRIPTION":"Delete Topic",
 	            	"ROLES":["ROLE_ADMIN"],

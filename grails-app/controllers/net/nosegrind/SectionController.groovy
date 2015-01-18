@@ -19,8 +19,11 @@ class SectionController {
 	}
 	
 	def show(){
-		println(params)
-		respond Section.get(params.id)
+		def section = Section.get(params.id.toLong())
+		if(section){
+			respond section
+		}
+		return null
 	}
 	
 	def save(){
@@ -35,21 +38,35 @@ class SectionController {
 		return null
 	}
 
-	def update(Section sectionInstance){
+	def update(){
+		Section sectionInstance = Section.get(params.id.toLong())
 		long version = sectionInstance.version
 		
-		if (version!=params.version.toLong()) {
-			render(status:HttpServletResponse.SC_BAD_REQUEST, text: 'Another user has updated this Section while you were editing.')
+		if(params?.version){
+			if (version!=params.version.toLong()) {
+				render(status:HttpServletResponse.SC_BAD_REQUEST, text: 'Another user has updated this Section while you were editing.')
+			}
 		}
-
 		sectionInstance.properties = params
 		
-		if (sectionInstance.hasErrors()) {
-			render(status:HttpServletResponse.SC_NOT_FOUND, text: 'Could not update section')
+		if (sectionInstance == null){
+			render(status:HttpServletResponse.SC_BAD_REQUEST)
 		}
+
+		if (sectionInstance.hasErrors()) {
+			sectionInstance.errors.allErrors.each { println it }
+			render(status:HttpServletResponse.SC_NOT_FOUND)
+		}
+
 		
-		sectionInstance.save()
-		respond Section.get(sectionInstance.id)
+		if(!sectionInstance.save(flush:true)){
+			respond null
+		}else{
+			//apiToolkitService.callHook('test',testInstance,'update')
+			respond Section.get(sectionInstance.id.toLong())
+		}
+
+		return null
 	}
 
 	def delete(Section sectionInstance){

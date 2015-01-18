@@ -1,3 +1,4 @@
+grails.plugin.location.Restrpc="${userHome}/workspace/grails-api-toolkit"
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -46,25 +47,25 @@ grails.project.dependency.resolution = {
     plugins {
         // plugins for the build system only
         build(':tomcat:latest.release'){
-		excludes  "log4j"
-	}
+			excludes  "log4j"
+		}
 
+		runtime ":jquery:1.11.1"
+		
         // plugins for the compile step
-        //compile ":scaffolding:2.0.1"
         compile(':cache:latest.release')
 
         // plugins needed at runtime but not for compilation
         compile (":hibernate:3.6.10.7")
-	//runtime ':hibernate4:4.3.5.2' // or ':hibernate:3.6.10.14'
-	runtime ':database-migration:1.4.0'
+		runtime ':database-migration:1.4.0'
 
-	compile(":spring-security-core:2.0-RC4")
-	compile(":api-toolkit:2.2")
-		
-	// used for testing
-	test(":spock:0.7") {
-		exclude "spock-grails-support"
-	}
-	compile(":rest:0.8")
+        // Uncomment these (or add new ones) to enable additional resources capabilities
+		compile(":spring-security-core:2.0-RC4")
+	
+		// used for testing
+		compile(":functional-spock:0.7"){
+			exclude "spock-grails-support"
+		}
+		compile(":rest:0.8")
     }
 }

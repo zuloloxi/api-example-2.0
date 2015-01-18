@@ -10,13 +10,20 @@
 
 /* 'permitAll' needs to always come first so other roles can make use of it
 * as they come afterward
+
+net.nosegrind.Topic
 */
 
 {
+	"NAME":"topic",
     "VALUES": {
         "id": {
             "type": "PKEY",
             "description":"ID for topic"
+        },
+        "version": {
+            "type": "Long",
+            "description":"Version for Updating Topic"
         },
         "topicName": {
             "type": "String",
@@ -26,9 +33,10 @@
 	"CURRENTSTABLE": "1",
 	"VERSION": {
 		"1": {
-			"DEFAULTACTION":"topic/list",
+			"DOMAINPACKAGE":"",
+			"DEFAULTACTION":"list",
 	        "URI": {
-	        	"topic/list": {
+	        	"list": {
 	             	"METHOD":"GET",
 	            	"DESCRIPTION":"List Topics",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -37,10 +45,10 @@
 	                	"permitAll":[]
 	                },
 	                "RESPONSE": {
-	                	"permitAll":["id","topicName"]
+	                	"permitAll":["id","topicName","version"]
 	                }
 	        	},
-	            "topic/show": {
+	            "show": {
 	             	"METHOD":"GET",
 	            	"DESCRIPTION":"Show Topic",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -49,10 +57,10 @@
 	                    "permitAll":["id"]
 	                },
 	                "RESPONSE": {
-	                	"permitAll":["id","topicName"]
+	                	"permitAll":["id","topicName","version"]
 	                }
 	            },
-	            "topic/save": {
+	            "save": {
 	            	"METHOD":"PUT",
 	            	"DESCRIPTION":"Create Topic",
 	            	"ROLES":["ROLE_ADMIN"],
@@ -61,24 +69,24 @@
 	                    "permitAll":["topicName"]
 	                },
 	                "RESPONSE": {
-	                    "permitAll":["id","topicName"]
+	                    "permitAll":["id","topicName","version"]
 	                },
 	                "ERROR":["304_NOT_MODIFIED"]
 	            },
-	            "topic/update": {
+	            "update": {
 	            	"METHOD":"POST",
 	            	"DESCRIPTION":"Update Topic",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
 	                "REQUEST": {
-	                    "permitAll":["id","topicName"]
+	                    "permitAll":["id","topicName","version"]
 	                },
 	                "RESPONSE": {
-	                    "permitAll":["id","topicName"]
+	                    "permitAll":["id"]
 	                },
 	                "ERROR":["304_NOT_MODIFIED"]
 	            },
-	            "topic/delete": {
+	            "delete": {
 	            	"METHOD":"DELETE",
 	            	"DESCRIPTION":"Delete Topic",
 	            	"ROLES":["ROLE_ADMIN"],

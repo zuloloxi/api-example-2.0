@@ -7,16 +7,17 @@ import net.nosegrind.apitoolkit.*
 
 class BootStrap {
 
+	def grailsApplication
+	
     def init = { servletContext ->
 		
 
 
 		environments {
-			production {}
-			development {
-				/*
+			//production {}
+			production {
 				Role rootRole = Role.findByAuthority('ROLE_ADMIN')?: new Role(authority:'ROLE_ADMIN').save(faileOnError:true)
-				Role userRole = Role.findByAuthority('ROLE_USER')?: new Role(authority:'ROLE_USER').save(faileOnError:true)
+				//Role userRole = Role.findByAuthority('ROLE_USER')?: new Role(authority:'ROLE_USER').save(faileOnError:true)
 		
 				// DEFAULT ADMIN
 				Person user = Person.findByUsername("${grailsApplication.config.root.login}")
@@ -24,6 +25,9 @@ class BootStrap {
 					Role adminRole = Role.findByAuthority("ROLE_ADMIN")
 					if(!user?.id){
 						user = new Person(username:"${grailsApplication.config.root.login}",password:"${grailsApplication.config.root.password}",email:"${grailsApplication.config.root.email}")
+						user.save(flush:true,failOnError:true)
+					}else{
+						user.password = "${grailsApplication.config.root.password}"
 						user.save(flush:true,failOnError:true)
 					}
 				
@@ -33,7 +37,6 @@ class BootStrap {
 					
 					status.isCompleted()
 				}
-				*/
 			}
 			test{}
 

@@ -14,6 +14,7 @@ class PostController {
                              
 	def defaultAction = 'list'
 	
+	
 	def list(){
 		params.max = (params.max) ? params.max?.toInteger() : 10
 		params.offset = (params.offset) ? params.offset?.toInteger() : 0
@@ -57,7 +58,6 @@ class PostController {
 	}
 
 	def listBySection(){
-		println(params)
 		def section = Section.get(params.id.toLong());
 		
 		def post =  Post.withCriteria() {
@@ -74,11 +74,15 @@ class PostController {
 	}
 	
 	def show(){
-		respond Post.get(params.id.toLong())
-		return null
+		def post = Post.get(params.id.toLong())
+		if(post){
+			respond post
+		}else{
+			return null
+		}
 	}
 	
-	def save(){
+	def create(){
 		Person person = springSecurityService.currentUser
 		Post post = new Post();
 
@@ -107,49 +111,60 @@ class PostController {
 		return null
 	}
 	
-	def update(Post postInstance){
+	def update(){
+		Post postInstance = Post.get(params.id.toLong())
 		Person person = springSecurityService.currentUser
-		List roles = springSecurityService.getPrincipal().getAuthorities()
+		List roles = springSecurityService.getPrincipal().getAuthorities() as List
 		if(postInstance.author==person.id || roles.contains('ROLE_ADMIN')){
 			long version = postInstance.version
 			
-			postInstance.title = params.title
-			postInstance.teaser = params.teaser
-			postInstance.content = params.content
-			postInstance.section = Section.get(params.section.toLong())
-			postInstance.stat = Status.get(params.statId.toLong())
+			postInstance.title = (params.title)?params.title:postInstance.title
+			postInstance.teaser = (params.teaser)?params.teaser:postInstance.teaser
+			postInstance.content = (params.content)?params.content:postInstance.content
+			postInstance.section = (params.section)?Section.get(params.section.toLong()):postInstance.section
+			postInstance.stat = (params.statId)?Status.get(params.statId.toLong()):postInstance.stat
 			
 			Date now = new Date();
 			postInstance.modifiedDate = now;
 			
 			if (postInstance == null){
-				render(status:HttpServletResponse.SC_NOT_FOUND)
+				render(status:HttpServletResponse.SC_BAD_REQUEST)
 			}
 	
 			if (postInstance.hasErrors()) {
+				postInstance.errors.allErrors.each { println it }
 				render(status:HttpServletResponse.SC_NOT_FOUND)
 			}
 	
-			if (version!=params.version.toLong()) {
-				render(status:HttpServletResponse.SC_BAD_REQUEST, text: 'Another user has updated this Post while you were editing.')
+			if(params?.version){
+				if (version!=params?.version?.toLong()) {
+					render(status:HttpServletResponse.SC_BAD_REQUEST, text: 'Another user has updated this Post while you were editing.')
+				}
 			}
 			
-			postInstance.save flush:true
-			//apiToolkitService.callHook('test',testInstance,'update')
-
-			respond Post.get(postInstance.id.toLong())
+			if(!postInstance.save(flush:true)){
+				respond null
+			}else{
+				//apiToolkitService.callHook('test',testInstance,'update')
+				respond Post.get(postInstance.id.toLong())
+			}
 		}else{
 			render(status:HttpServletResponse.SC_NOT_FOUND)
 		}
 		return null
 	}
 	
-	def delete(Post postInstance){
+	def delete(){
+		Post postInstance = Post.get(params.id.toLong())
 		if (postInstance == null) {
 			render(status:HttpServletResponse.SC_NOT_FOUND)
 		}
-
-		postInstance.delete flush:true
-		return null
+		
+		if(!postInstance.delete(flush:true)){
+			LinkedHashMap model = [id:params.id]
+			respond model as Object
+		}else{
+			return null
+		}
 	}
 }
