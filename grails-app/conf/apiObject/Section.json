@@ -58,7 +58,7 @@
 	                	"permitAll":["id","sectionName","version"]
 	                }
 	            },
-	            "save": {
+	            "create": {
 	            	"METHOD":"PUT",
 	            	"DESCRIPTION":"Create Section",
 	            	"ROLES":["ROLE_ADMIN"],
