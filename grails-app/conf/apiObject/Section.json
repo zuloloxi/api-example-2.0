@@ -59,7 +59,7 @@
 	                }
 	            },
 	            "create": {
-	            	"METHOD":"PUT",
+	            	"METHOD":"POST",
 	            	"DESCRIPTION":"Create Section",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
@@ -72,7 +72,7 @@
 	                "ERROR":["304_NOT_MODIFIED"]
 	            },
 	            "update": {
-	            	"METHOD":"POST",
+	            	"METHOD":"PUT",
 	            	"DESCRIPTION":"Update Section",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],

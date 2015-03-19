@@ -1,4 +1,4 @@
-//grails.plugin.location.Restrpc="${userHome}/workspace/grails-api-toolkit"
+grails.plugin.location.Restrpc="${userHome}/workspace/grails-api-toolkit"
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
@@ -66,7 +66,7 @@ grails.project.dependency.resolution = {
 		compile(":functional-spock:0.7"){
 			exclude "spock-grails-support"
 		}
-		compile(":api-toolkit:2.3")
+		//compile(":api-toolkit:2.3")
 		compile(":rest:0.8")
     }
 }

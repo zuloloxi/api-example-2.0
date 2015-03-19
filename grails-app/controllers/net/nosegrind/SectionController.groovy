@@ -26,11 +26,13 @@ class SectionController {
 		return null
 	}
 	
-	def save(){
+	def create(){
 		Section sectionInstance = new Section()
-		sectionInstance.properties = params
+		sectionInstance.sectionName = params.sectionName
+		sectionInstance.sectionName = (!params?.commentsAllowed?.empty)?params.sectionName:true
 
-		if (!sectionInstance.save()) {
+		if (!sectionInstance.save(flush:true)) {
+			sectionInstance.errors.allErrors.each { println it }
 			render(status:HttpServletResponse.SC_NOT_FOUND, text: 'Could not save section')
 		}else{
 			respond Section.get(sectionInstance.id)
@@ -47,7 +49,8 @@ class SectionController {
 				render(status:HttpServletResponse.SC_BAD_REQUEST, text: 'Another user has updated this Section while you were editing.')
 			}
 		}
-		sectionInstance.properties = params
+		sectionInstance.sectionName = params.sectionName
+		sectionInstance.sectionName = (!params?.commentsAllowed?.empty)?params.sectionName:true
 		
 		if (sectionInstance == null){
 			render(status:HttpServletResponse.SC_BAD_REQUEST)

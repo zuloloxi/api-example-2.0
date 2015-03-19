@@ -13,7 +13,7 @@ class ApiFunctionalSpec extends Specification {
 	static Long createdPostVersion = null
 	
 	final String postId = '1'
-	final String sectionId = '2'
+	final String sectionId = '6'
 	final String authorId = '1'
 	
 	def 'Validate User'() {
@@ -47,14 +47,14 @@ class ApiFunctionalSpec extends Specification {
 			assert json.collect(){it.key} == ['id', 'sectionId', 'statId', 'title','version']
   }
   
-  def 'POST Request'() {
+  def 'PUT Request'() {
 	  Object json
 	  LinkedHashMap errOutput = [:]
 	  
 	  when:
 		  def ant = new AntBuilder()
 		  ant.exec(outputProperty:"cmdOut",errorProperty:"cmdErr",resultProperty:"cmdExit",failonerror:"false",executable:"curl"){
-			  arg(line:"""--verbose --header "Content-Type: application/json" -d "{'title': 'test post','teaser': 'This is just a test post to see if this works. Testing the api post system.','content':'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel consequat nisl, quis commodo neque. Integer ultrices vitae nulla lacinia rutrum. Duis ut porta arcu, sed gravida tortor. Donec pulvinar elit turpis, ultricies tristique mi auctor ac. Ut elementum ullamcorper risus ac sollicitudin. Morbi semper ultrices enim vel euismod. Proin eleifend orci ac elit mollis tempor. Nulla egestas odio eu volutpat eleifend. Nunc nec massa eget nisl sodales posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc accumsan pretium sapien a tincidunt. Sed at fringilla mi.','section':${this.sectionId},'author':${this.authorId}}" --request POST http://localhost:8080/api_v0.1/post/create --cookie cookies.txt""")
+			  arg(line:"""--verbose --header "Content-Type: application/json" -d "{'title': 'test post','teaser': 'This is just a test post to see if this works. Testing the api post system.','content':'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel consequat nisl, quis commodo neque. Integer ultrices vitae nulla lacinia rutrum. Duis ut porta arcu, sed gravida tortor. Donec pulvinar elit turpis, ultricies tristique mi auctor ac. Ut elementum ullamcorper risus ac sollicitudin. Morbi semper ultrices enim vel euismod. Proin eleifend orci ac elit mollis tempor. Nulla egestas odio eu volutpat eleifend. Nunc nec massa eget nisl sodales posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc accumsan pretium sapien a tincidunt. Sed at fringilla mi.','section':${this.sectionId},'author':${this.authorId}}" --request PUT http://localhost:8080/api_v0.1/post/create --cookie cookies.txt""")
 		  }
 		  errOutput = parseOutput(ant.project.properties.cmdErr)
 		  json = new JsonSlurper().parseText(ant.project.properties.cmdOut)
@@ -65,14 +65,14 @@ class ApiFunctionalSpec extends Specification {
 			assert json.collect(){it.key} == ['id','version']
   }
 
-  def 'PUT Request'() {
+  def 'POST Request'() {
 	  Object json
 	  LinkedHashMap errOutput = [:]
 	  
 	  when:
 		  def ant = new AntBuilder()
 		  ant.exec(outputProperty:"cmdOut",errorProperty:"cmdErr",resultProperty:"cmdExit",failonerror:"false",executable:"curl"){
-			  arg(line:"""--verbose --request PUT --header "Content-Type: application/json" -d "{'title':'testamundo','version':${createdPostVersion}}" "http://localhost:8080/api_v0.1/post/update/${createdPostId}" --cookie cookies.txt""")
+			  arg(line:"""--verbose --request POST --header "Content-Type: application/json" -d "{'title':'testamundo','version':${createdPostVersion}}" "http://localhost:8080/api_v0.1/post/update/${createdPostId}" --cookie cookies.txt""")
 		  }
 		  errOutput = parseOutput(ant.project.properties.cmdErr)
 		  json = new JsonSlurper().parseText(ant.project.properties.cmdOut)
@@ -95,9 +95,9 @@ class ApiFunctionalSpec extends Specification {
 		  json = new JsonSlurper().parseText(ant.project.properties.cmdOut)
 	then:
 		assert errOutput.response.code.code == '200'
-		assert json.collect(){it.key} == ['id','version']
+		assert json.collect(){it.key} == ['id','sectionName','version']
   }
-  
+  /*
   def 'DELETE Request'() {
 	  Object json
 	  LinkedHashMap errOutput = [:]
@@ -112,7 +112,7 @@ class ApiFunctionalSpec extends Specification {
 		then:
 			assert errOutput.response.code.code == '200'
   }
-
+*/
   LinkedHashMap parseOutput(String output){
 	  //println("return code : "+ant.project.properties.cmdExit)
 	  //println("stderr : "+ant.project.properties.cmdErr)

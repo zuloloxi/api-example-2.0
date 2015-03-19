@@ -228,7 +228,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/logout/**':          		      ['permitAll']
 ]
 
-root.login=admin
-root.password=changeThisPassword
-root.email=you@yourwebsite.com
+//root.login='admin'
+//root.password='changeThisPassword'
+//root.email='you@yourwebsite.com'
 

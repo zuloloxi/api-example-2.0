@@ -61,7 +61,7 @@ net.nosegrind.Topic
 	                }
 	            },
 	            "save": {
-	            	"METHOD":"PUT",
+	            	"METHOD":"POST",
 	            	"DESCRIPTION":"Create Topic",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
@@ -74,7 +74,7 @@ net.nosegrind.Topic
 	                "ERROR":["304_NOT_MODIFIED"]
 	            },
 	            "update": {
-	            	"METHOD":"POST",
+	            	"METHOD":"PUT",
 	            	"DESCRIPTION":"Update Topic",
 	            	"ROLES":["ROLE_ADMIN"],
 	            	"BATCH":["ROLE_ADMIN"],
