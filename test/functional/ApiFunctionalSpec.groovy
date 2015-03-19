@@ -97,7 +97,7 @@ class ApiFunctionalSpec extends Specification {
 		assert errOutput.response.code.code == '200'
 		assert json.collect(){it.key} == ['id','sectionName','version']
   }
-  /*
+
   def 'DELETE Request'() {
 	  Object json
 	  LinkedHashMap errOutput = [:]
@@ -112,7 +112,7 @@ class ApiFunctionalSpec extends Specification {
 		then:
 			assert errOutput.response.code.code == '200'
   }
-*/
+
   LinkedHashMap parseOutput(String output){
 	  //println("return code : "+ant.project.properties.cmdExit)
 	  //println("stderr : "+ant.project.properties.cmdErr)
